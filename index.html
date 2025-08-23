@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>城市森林与野生动物保护实验室</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2E7D32', // 主色调：深绿色
+                        secondary: '#4CAF50', // 次要色：中绿色
+                        accent: '#81C784', // 强调色：浅绿色
+                        neutral: '#F5F5F5', // 中性色：浅灰
+                        dark: '#1B5E20', // 深色：更深的绿色
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease-in-out;
+            }
+            .card-hover {
+                @apply hover:shadow-lg hover:-translate-y-1 transition-all duration-300;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="text-primary text-3xl">
+                    <i class="fa fa-leaf"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold text-primary">城市森林与野生动物保护实验室</h1>
+                    <p class="text-xs text-gray-500 hidden md:block">Urban Garden Science & Planning Institute</p>
+                </div>
+            </div>
+            
+            <!-- 桌面导航 -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-primary transition-custom font-medium">首页</a>
+                <a href="#research" class="text-gray-700 hover:text-primary transition-custom font-medium">科研项目</a>
+                <a href="#achievements" class="text-gray-700 hover:text-primary transition-custom font-medium">野生动物保护</a>
+                <a href="#projects" class="text-gray-700 hover:text-primary transition-custom font-medium">环境教育</a>
+                <a href="#equipment" class="text-gray-700 hover:text-primary transition-custom font-medium">关于我们</a>
+                <a href="#about" class="text-gray-700 hover:text-primary transition-custom font-medium">联系我们</a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuBtn" class="md:hidden text-gray-700 focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#home" class="text-gray-700 hover:text-primary py-2 transition-custom">首页</a>
+                <a href="#research" class="text-gray-700 hover:text-primary py-2 transition-custom">科研项目</a>
+                <a href="#achievements" class="text-gray-700 hover:text-primary py-2 transition-custom">野生动物保护</a>
+                <a href="#projects" class="text-gray-700 hover:text-primary py-2 transition-custom">环境教育</a>
+                <a href="#equipment" class="text-gray-700 hover:text-primary py-2 transition-custom">关于我们</a>
+                <a href="#about" class="text-gray-700 hover:text-primary py-2 transition-custom">联系我们</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="pt-24 md:pt-0 min-h-screen flex items-center bg-gradient-to-br from-primary/90 to-dark relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <img src="https://picsum.photos/id/106/1920/1080" alt="园林景观背景图" class="w-full h-full object-cover" />
+        </div>
+        <div class="container mx-auto px-4 py-20 md:py-32 relative z-10">
+            <div class="max-w-3xl">
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white leading-tight text-shadow mb-6">
+                    科研保护<br>教育共融
+                </h1>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 max-w-2xl">
+                   以科研项目、野生动物保护与环境教育为核心，系统探索和实践城市森林碳循环与生态服务功能、城市生物多样性保护及公众生态意识提升。
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#research" class="bg-white text-primary px-6 py-3 rounded-md font-medium hover:bg-opacity-90 transition-custom shadow-lg">
+                        探索科研 · 教育 · 保护
+                    </a>
+                    <a href="#contact" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white/10 transition-custom">
+                        联系我们
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <a href="#research" aria-label="向下滚动"><i class="fa fa-chevron-down"></i></a>
+        </div>
+    </section>
+<!-- 野生动物保护 -->
+<section id="achievements" class="py-20 bg-neutral">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-4">野生动物保护</h2>
+      <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        建设城市野生动物栖息地，通过监测鸟类、两爬及小型哺乳动物群落，探索城市化背景下的保护策略。
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- 1 鸟类监测 -->
+      <div class="bg-white rounded-lg p-8 shadow-md card-hover">
+        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
+          <!-- 鸟 -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
+            <path d="M22 7c0-1.1-.9-2-2-2h-7.41l1.7-1.7c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L10.41 7H5c-1.1 0-2 .9-2 2 0 .22.03.43.09.63l2.04 6.11C5.44 16.5 6.74 17 8 17h8c1.26 0 2.56-.5 2.87-1.26L21.91 9.63c.06-.2.09-.41.09-.63zM8 15c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm8 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-4 text-gray-800">鸟类监测</h3>
+        <p class="text-gray-600 mb-4">
+          鸟类作为重要的生态指示物种，其多样性和分布格局能够反映生态系统健康状况。鸟类监测研究通过定点观察、声学监测与遥感技术等手段，记录鸟类的种类、数量和季节性动态，评估城市化、气候变化及生境变化对鸟类群落的影响。研究成果不仅有助于保护生物多样性和优化城市生态空间布局，也为野生动物保护和生态环境管理提供科学依据。
+        </p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-start"><i class="fa fa-check text-primary mt-1 mr-2"></i><span class="text-gray-600">鸟类多样性监测</span></li>
+          <li class="flex items-start"><i class="fa fa-check text-primary mt-1 mr-2"></i><span class="text-gray-600">生态健康评估</span></li>
+          <li class="flex items-start"><i class="fa fa-check text-primary mt-1 mr-2"></i><span class="text-gray-600">保护与管理依据</span></li>
+        </ul>
+      </div>
+
+      <!-- 2 两爬及小型哺乳动物 -->
+      <div class="bg-white rounded-lg p-8 shadow-md card-hover">
+        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
+          <!-- 蜥蜴/两栖 -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
+            <path d="M19.5 3h-1.75L16 4H8L6.25 3H4.5C3.12 3 2 4.12 2 5.5S3.12 8 4.5 8h.51L6 21h12l1.49-13h.51c1.38 0 2.5-1.12 2.5-2.5S20.88 3 19.5 3z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-4 text-gray-800">两爬及小型哺乳动物群落监测</h3>
+        <p class="text-gray-600 mb-4">
+          两栖爬行动物和小型哺乳动物对环境变化极为敏感，是评估生态系统健康的重要指示类群。通过布设样线调查、红外相机监测和生态捕捉等方法，研究其物种组成、种群动态与生境偏好，揭示城市化和气候变化对群落结构的影响。这一研究不仅有助于保护关键物种及其栖息地，还为制定城市生物多样性保护策略和生态修复方案提供科学依据。
+        </p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-start"><i class="fa fa-check text-primary mt-1 mr-2"></i><span class="text-gray-600">群落动态监测</span></li>
+          <li class="flex items-start"><i class="fa fa-check text-primary mt-1 mr-2"></i><span class="text-gray-600">敏感环境指示</span></li>
+          <li class="flex items-start"><i class="fa fa-check text-primary mt-1 mr-2"></i><span class="text-gray-600">保护修复依据</span></li>
+        </ul>
+      </div>
+
+      <!-- 3 栖息地环境监测 -->
+      <div class="bg-white rounded-lg p-8 shadow-md card-hover">
+        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
+          <!-- 树 -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8" viewBox="0 0 24 24">
+            <path d="M12 22c3.31 0 6-2.69 6-6V8.05c.55-.45.55-1.34 0-1.79L12 2 6 6.26C5.45 6.71 5.45 7.6 6 8.05V16c0 3.31 2.69 6 6 6zm-2-8c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1v2z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-4 text-gray-800">栖息地环境监测</h3>
+        <p class="text-gray-600 mb-4">
+          栖息地的水体、植被和土壤条件直接影响鸟类、两栖爬行动物及小型哺乳动物的分布和群落结构。因此，环境监测成为理解生态系统健康和物种栖息偏好的关键手段。
+        </p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-start"><i class="fa fa-check text-primary mt-1 mr-2"></i><span class="text-gray-600">水体监测：评估环境质量、湿度和水生生境条件，为水生及湿地依赖性物种提供参考。</span></li>
+          <li class="flex items-start"><i class="fa fa-check text-primary mt-1 mr-2"></i><span class="text-gray-600">植被监测：记录植被类型、覆盖度和结构，为觅食、繁殖及栖息提供数据支撑。</span></li>
+          <li class="flex items-start"><i class="fa fa-check text-primary mt-1 mr-2"></i><span class="text-gray-600">土壤监测：分析土壤养分、环境质量等状况，揭示生境承载力和生态系统功能状态。</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- 环境教育 -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-4">环境教育</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">开展面向青少年的环境教育课程，包括自然观察、实验学习和生态游戏。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- 项目1 -->
+                <div class="relative rounded-lg overflow-hidden h-80 group">
+                    <img src="https://picsum.photos/id/1036/800/600" alt="理论科普" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                        <span class="text-sm text-white/80 mb-2"></span>
+                        <h3 class="text-2xl font-bold text-white mb-3">理论科普</h3>
+                        <p class="text-white/90 mb-4 max-w-md">基于森林碳循环与野生动物保护，理论科普讲解生态系统功能、碳汇作用及环境变化影响，提升公众科学素养与生态保护意识，支持可持续发展，激发青少年参与环保实践。</p>
+                        <a href="#" class="text-white inline-flex items-center hover:underline">
+                        <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 项目2 -->
+                <div class="relative rounded-lg overflow-hidden h-80 group">
+                    <img src="https://picsum.photos/id/137/800/600" alt="实地观察与实践" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                        <span class="text-sm text-white/80 mb-2"></span>
+                        <h3 class="text-2xl font-bold text-white mb-3">实地观察与实践</h3>
+                        <p class="text-white/90 mb-4 max-w-md">通过鸟类、两爬类监测及水体、土壤、植被调查，结合森林碳循环体验与生态互动，实地观察培养科学探究能力，增强生态意识，激发学习兴趣，为生物多样性保护提供实践依据。</p>
+                        <a href="#" class="text-white inline-flex items-center hover:underline">
+                         <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- 小型项目1 -->
+                <div class="bg-neutral rounded-lg overflow-hidden shadow-md card-hover">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://picsum.photos/id/142/400/300" alt="森林碳循环科普课程" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">森林碳循环科普课程</h3>
+                        <p class="text-gray-600 text-sm">了解森林如何吸收二氧化碳、储存碳和调节气候，亲手参与碳储量计算和生态模型体验，让学生直观感受森林在应对气候变化中的重要作用。</p>
+                    </div>
+                </div>
+                
+                <!-- 小型项目2 -->
+                <div class="bg-neutral rounded-lg overflow-hidden shadow-md card-hover">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://picsum.photos/id/1058/400/300" alt="野生动物观察与保护体验" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">野生动物观察与保护体验</h3>
+                        <p class="text-gray-600 text-sm">跟随专业导师观察鸟类、两栖爬行动物及小型哺乳动物，学习识别、记录和保护方法，体验人与自然共生的乐趣，培养生物多样性保护意识。</p>
+                    </div>
+                </div>
+                
+                <!-- 小型项目3 -->
+                <div class="bg-neutral rounded-lg overflow-hidden shadow-md card-hover">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://picsum.photos/id/1043/400/300" alt="森林公园" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">森林碳与生态游戏互动</h3>
+                        <p class="text-gray-600 text-sm">通过模拟森林碳循环和食物链的互动游戏，让学生理解碳汇、碳源与生态平衡之间的关系，寓教于乐，激发学习兴趣与环保责任感。</p>
+                    </div>
+                </div>
+                
+                <!-- 小型项目4 -->
+                <div class="bg-neutral rounded-lg overflow-hidden shadow-md card-hover">
+                    <div class="h-40 overflow-hidden">
+                        <img src="https://picsum.photos/id/167/400/300" alt="道路绿化" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">栖息地环境监测实践</h3>
+                        <p class="text-gray-600 text-sm">带领学生实地采集水体、土壤和植被数据，结合鸟类及两爬类群落观察，了解生态系统健康状况，掌握基础环境监测方法，培养科学探究能力。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-4">关于我们</h2>
+                    <div class="w-20 h-1 bg-primary mb-6"></div>
+                    <p class="text-gray-600 mb-6">城市森林与野生动物保护实验室是专注于城市森林碳循环科学研究、野生动物保护与科普教育融合的专业科研机构。致力于通过科学研究与公众教育推动城市森林建设与野生动物保护。</p>
+                    <p class="text-gray-600 mb-6">我院拥有一支由园林、生态、土壤、植物等领域专家组成的高素质科研团队，配备先进的科研设备和实验设施，在城市园林规划设计、生态修复、土壤改良、植物保护等领域取得了多项突破性成果。</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="flex items-start">
+                            <div class="text-primary text-xl mt-1 mr-4">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">专业团队</h4>
+                                <p class="text-gray-600 text-sm">团队由中国科学院植物所生态学博士及研究生导师牵头，专注城市森林碳循环与生态功能研究，结合野生动物栖息地建设，开展生物多样性保护与城市生态可持续实践。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-primary text-xl mt-1 mr-4">
+                                <i class="fa fa-flask"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">科研平台</h4>
+                                <p class="text-gray-600 text-sm">拥有多个专业实验室和野外试验基地，为科研科普教育工作提供有力支撑</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-primary text-xl mt-1 mr-4">
+                                <i class="fa fa-handshake-o"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">合作交流</h4>
+                                <p class="text-gray-600 text-sm">与国内外多家科研机构、高校建立长期合作关系，开展广泛学术交流</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-primary text-xl mt-1 mr-4">
+                                <i class="fa fa-lightbulb-o"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">创新能力</h4>
+                                <p class="text-gray-600 text-sm">持续推进科技创新，每年承担国家级或省部级项目</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="inline-block bg-primary text-white px-6 py-3 rounded-md font-medium hover:bg-dark transition-custom shadow-md">
+                        联系我们 <i class="fa fa-envelope-o ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <img src="https://picsum.photos/id/1048/600/800" alt="研究院实验室" class="rounded-lg shadow-md w-full h-64 object-cover" />
+                        <img src="https://picsum.photos/id/1063/600/400" alt="科研团队野外工作" class="rounded-lg shadow-md w-full h-40 object-cover" />
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <img src="https://picsum.photos/id/1067/600/400" alt="学术交流活动" class="rounded-lg shadow-md w-full h-40 object-cover" />
+                        <img src="https://picsum.photos/id/152/600/800" alt="科研成果展示" class="rounded-lg shadow-md w-full h-64 object-cover" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- 联系我们 -->
+    <section id="contact" class="py-20 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-4">联系我们</h2>
+                <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">如果您对我们的研究成果、技术服务或合作项目感兴趣，欢迎与我们联系</p>
+            </div>
+            
+            <div class="grid grid-cols-1 **lg:grid-cols-1** gap-8">
+                <div class="**bg-white p-8 rounded-lg shadow-md mx-auto max-w-md**">
+                    <h3 class="text-xl font-bold mb-6 text-gray-800">联系方式</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-4">
+                                <i class="fa fa-map-marker"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">地址</h4>
+                                <p class="text-gray-600">上海市徐汇区桂林路100号</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-4">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">电话</h4>
+                                <p class="text-gray-600">010-12345678</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-4">
+                                <i class="fa fa-envelope-o"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">邮箱</h4>
+                                <p class="text-gray-600">zhaomin@shnu.edu.cn</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-4">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-1">工作时间</h4>
+                                <p class="text-gray-600">周一至周五: 9:00 - 17:00</p>
+                                <p class="text-gray-600">周六、周日: 休息</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold text-gray-800 mb-4">关注我们</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-dark transition-custom">
+                                <i class="fa fa-weixin"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-dark transition-custom">
+                                <i class="fa fa-weibo"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-dark transition-custom">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-dark transition-custom">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+               </section>
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-dark">
+        <i class="fa fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') 
+                ? '<i class="fa fa-bars text-xl"></i>' 
+                : '<i class="fa fa-times text-xl"></i>';
+        });
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('py-2', 'shadow');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2', 'shadow');
+            }
+        });
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 关闭移动菜单（如果打开）
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    menuBtn.innerHTML = '<i class="fa fa-bars text-xl"></i>';
+                }
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 数字计数动画
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(() => observer.observe(counter), 1);
+                    } else {
+                        counter.innerText = target;
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+        
+        // 科研投入与成果图表
+        const ctx = document.getElementById('researchChart').getContext('2d');
+        const researchChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+                datasets: [
+                    {
+                        label: '科研投入（万元）',
+                        data: [500, 650, 800, 950, 1200, 1500],
+                        borderColor: 'rgba(255, 255, 255, 0.8)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: '成果产出（项）',
+                        data: [20, 28, 35, 42, 58, 75],
+                        borderColor: 'rgba(129, 199, 132, 1)',
+                        backgroundColor: 'rgba(129, 199, 132, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'rgba(255, 255, 255, 0.9)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
